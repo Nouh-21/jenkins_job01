@@ -1,7 +1,7 @@
 pipeline {
    agent any
    environment {
-         VERSION_NUM = '1.0.1'
+          NEW_VERSION = '1.0.1'
    }
    stages {
      stage("test") {
@@ -14,7 +14,7 @@ pipeline {
       
       steps {
          echo 'this is a building  stage'
-         echo 'this is a number of version ${VERSION_NUM}'
+         echo 'this is a number of version ${NEW_VERSION}'
       }
     }
    
