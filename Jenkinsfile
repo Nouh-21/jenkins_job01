@@ -10,7 +10,7 @@ pipeline {
      stage("build") {
         when {
            expression {
-                  BRANCH-NAME == 'master'
+                  BRANCH_NAME == 'master'
            }
         }
       steps {
