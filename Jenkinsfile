@@ -3,7 +3,7 @@ pipeline {
    parameters {
       string(name: 'VRS', defaultValue: '', description: 'this is my version default on prd')
       choise(name: 'VERSION', choises: ['0.0.1', '0.2.1', '0.3.3'], description: '')
-      booleanPram(name: 'testExecute', defaultValue: true, description: '')
+      booleanParam(name: 'testExecute', defaultValue: true, description: '')
    }
    tools {
       maven 'maven-3.9'
