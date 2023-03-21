@@ -1,5 +1,8 @@
 pipeline {
    agent any
+   tools {
+      maven 'maven-3.9'
+   }
    environment {
           VERSION_NUM = '1.0.1'
           CREDENTAILS_USER = credentials('user_credentials')
@@ -8,6 +11,7 @@ pipeline {
      stage("test") {
       steps {
          echo 'his is a testing stage'
+         sh "mvn install"
       }
      }
      
