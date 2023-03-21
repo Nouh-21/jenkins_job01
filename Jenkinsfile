@@ -23,7 +23,7 @@ pipeline {
         steps {
              echo 'this is a deploo'
              echo " this is a credentials ${CREDENTAILS_USER}"
-             sh ${CREDENTAILS_USER}          
+           //  sh ${CREDENTAILS_USER}          
       }
    }
        }
