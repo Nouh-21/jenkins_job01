@@ -1,5 +1,8 @@
 pipeline {
-   agent any;
+   agent any
+   environments {
+         VERSION_NUM = '1.0.1'
+   }
    stages {
      stage("test") {
       steps {
@@ -8,13 +11,10 @@ pipeline {
      }
      
      stage("build") {
-        when {
-           expression {
-                  BRANCH_NAME == 'main'
-           }
-        }
+      
       steps {
          echo 'this is a building  stage'
+         echo 'this is a number of version ${VERSION_NUM}'
       }
     }
    
