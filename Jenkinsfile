@@ -2,7 +2,7 @@ pipeline {
    agent any
    parameters {
       string(name: 'VRS', defaultValue: '', description: 'this is my version default on prd')
-      choise(name: 'VERSION', choises: ['0.0.1', '0.2.1', '0.3.3'], description: '')
+      choice(name: 'VERSION', choices: ['0.0.1', '0.2.1', '0.3.3'], description: '')
       booleanParam(name: 'testExecute', defaultValue: true, description: '')
    }
    tools {
