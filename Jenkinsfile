@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
    agent any
    parameters {
@@ -13,6 +15,12 @@ pipeline {
           CREDENTAILS_USER = credentials('user_credentials')
    }
    stages {
+      
+      stage("init"){
+         script {
+            def gv = load "groov.script"
+         }
+      }
      stage("test") {
       steps {
          echo 'his is a testing stage'
