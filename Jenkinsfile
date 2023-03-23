@@ -47,19 +47,20 @@ pipeline {
     }
    
     stage("deploye") {
-        steps {
+        
            input {
               message "entrez l'env souhaité svp!! "
               ok "Done"
               parametres {
                  choice(name: "env", choices: ["int","dev","preprod","prod"], description: "")
               }
-           }
+         steps {
+           
              script {
                   gv.deploye()
               }
            //  sh ${CREDENTAILS_USER}          
-      }
+        }
    }
        }
          
