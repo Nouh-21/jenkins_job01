@@ -9,7 +9,7 @@ def test(){
 
 def deploye(){
   echo 'this is a deploo'
-  echo " this is a credentials ${CREDENTAILS_USER}"
+  echo " this will deploy in env ${params.env}"
 }
 
 return this
