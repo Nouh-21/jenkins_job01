@@ -4,8 +4,8 @@ def gv
 pipeline {
    agent any
    parameters {
-      string(name: 'VRS', defaultValue: '', description: 'this is my version default on prd')
-      choice(name: 'VERSION', choices: ['0.0.1', '0.2.1', '0.3.3'], description: '')
+      string(name: 'VRS', defaultValue: 'entrer', description: 'this is my version default on prd')
+      choice(name: 'VERSION', choices: ['0.0.1', '0.2.1', '0.3.3'], description: 'entrez une version')
       booleanParam(name: 'testExecute', defaultValue: true, description: '')
    }
    tools {
@@ -48,9 +48,16 @@ pipeline {
    
     stage("deploye") {
         steps {
+           input {
+              message "entrez l'env souhaité svp!! "
+              ok "Done"
+              parametres {
+                 choice(name: "env", choices: ["int","dev","preprod","prod"], description: "")
+              }
+           }
              script {
-            gv.deploye()
-            }
+                  gv.deploye()
+              }
            //  sh ${CREDENTAILS_USER}          
       }
    }
