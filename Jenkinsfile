@@ -21,14 +21,15 @@ pipeline {
             def gv = load "groov.script"
          }
       }
-     stage("test") {
+     stage("Build") {
       steps {
-         echo 'his is a testing stage'
-         sh "mvn install"
+         script {
+            gv.build()
+         }
       }
      }
      
-     stage("build") {
+     stage("test") {
         when {
            expression {
               params.testExecute == true
@@ -36,15 +37,17 @@ pipeline {
         }
       
       steps {
-         echo 'this is a building  stage'
-         echo "this is a number of version ${params.VERSION}"
+         script {
+            gv.test()
+         }
       }
     }
    
     stage("deploye") {
         steps {
-             echo 'this is a deploo'
-             echo " this is a credentials ${CREDENTAILS_USER}"
+             script {
+            gv.deploye()
+            }
            //  sh ${CREDENTAILS_USER}          
       }
    }
