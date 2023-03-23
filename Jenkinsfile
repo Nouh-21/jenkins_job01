@@ -19,30 +19,32 @@ pipeline {
    stages {
       
       stage("init"){
-         script {
-            def gv = load "script.groovy"
-         }
+         steps { 
+             script {
+                def gv = load "script.groovy"
+               }
+          }
       }
      stage("Build") {
-      steps {
-         script {
-            gv.build()
-         }
-      }
+        steps {
+             script {
+                  gv.build()
+             }
+        }
      }
      
      stage("test") {
         when {
            expression {
-              params.testExecute == true
+              params.testExecute
            }
         }
       
       steps {
-         script {
-            gv.test()
-         }
-      }
+            script {
+               gv.test()
+            }
+        }
     }
    
     stage("deploye") {
