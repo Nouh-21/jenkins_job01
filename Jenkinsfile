@@ -54,14 +54,15 @@ pipeline {
               parametres {
                  choice(name: "env", choices: ["int","dev","preprod","prod"], description: "")
               }
+           }
          steps {
            
              script {
                   gv.deploye()
               }
            //  sh ${CREDENTAILS_USER}          
-        }
-   }
+         }
+     }
        }
          
 }
