@@ -51,9 +51,9 @@ pipeline {
            input {
               message "entrez l'env souhaité svp!! "
               ok "Done"
-              parametres {
+              parameters {
                  choice(name: "env", choices: ["int","dev","preprod","prod"], description: "")
-              }
+                }
            }
          steps {
            
@@ -63,6 +63,6 @@ pipeline {
            //  sh ${CREDENTAILS_USER}          
          }
      }
-       }
+  }
          
 }
