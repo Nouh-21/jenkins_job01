@@ -1,6 +1,6 @@
 def build(){
-   sh "this a building stage"
-   sh "mvn install"
+   echo "this a building stage"
+   sh 'mvn install'
 }
 def test(){
   echo 'this is a building  stage'
