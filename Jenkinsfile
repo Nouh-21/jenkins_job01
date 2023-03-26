@@ -17,7 +17,7 @@ pipeline {
    }
    stages {
       
-      stage("init"){
+      def dp = stage("init"){
          steps { 
              script {
                   gv = load "script.groovy"
@@ -28,6 +28,7 @@ pipeline {
         steps {
              script {
                   gv.build()
+                  echo "this is an env $(dp)"
              }
         }
      }
