@@ -60,7 +60,7 @@ pipeline {
            
              script {
                   gv.deploye()
-                 sh "this is an env ${env}"
+                // sh "this is an env ${env}"
               }
            //  sh ${CREDENTAILS_USER}          
          }
