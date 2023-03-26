@@ -49,7 +49,7 @@ pipeline {
    
     stage("deploye") {
         
-           def dp = input {
+           input {
               message "entrez l'env souhaité svp!! "
               ok "Done"
               parameters {
@@ -60,7 +60,7 @@ pipeline {
            
              script {
                   gv.deploye()
-                 sh "this is an env ${dp}"
+                 sh "this is an env ${env}"
               }
            //  sh ${CREDENTAILS_USER}          
          }
