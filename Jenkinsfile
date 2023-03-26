@@ -28,7 +28,7 @@ pipeline {
         steps {
              script {
                   gv.build()
-                  sh "this is an env $(dp)"
+                sh "this is an env ${dp}"
              }
         }
      }
