@@ -17,7 +17,7 @@ pipeline {
    }
    stages {
       
-      def dp = stage("init"){
+       stage("init"){
          steps { 
              script {
                   gv = load "script.groovy"
@@ -28,7 +28,7 @@ pipeline {
         steps {
              script {
                   gv.build()
-                sh "this is an env ${dp}"
+                
              }
         }
      }
@@ -49,7 +49,7 @@ pipeline {
    
     stage("deploye") {
         
-           input {
+           def dp = input {
               message "entrez l'env souhaité svp!! "
               ok "Done"
               parameters {
@@ -60,6 +60,7 @@ pipeline {
            
              script {
                   gv.deploye()
+                 sh "this is an env ${dp}"
               }
            //  sh ${CREDENTAILS_USER}          
          }
