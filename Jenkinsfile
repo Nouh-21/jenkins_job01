@@ -1,68 +1,36 @@
 
-def gv
-
 pipeline {
    agent any
-   parameters {
-      string(name: 'VRS', defaultValue: 'entrer', description: 'this is my version default on prd')
-      choice(name: 'VERSION', choices: ['0.0.1', '0.2.1', '0.3.3'], description: 'entrez une version')
-      booleanParam(name: 'testExecute', defaultValue: true, description: '')
-   }
-   tools {
-      maven 'maven-3.9'
-   }
-   environment {
-          VERSION_NUM = '1.0.1'
-          CREDENTAILS_USER = credentials('user_credentials')
-   }
+   tools { maven 'maven-3.9' }
    stages {
       
-       stage("init"){
-         steps { 
-             script {
-                  gv = load "script.groovy"
-               }
-          }
-      }
-     stage("Build") {
+     stage("Build jar") {
         steps {
-             script {
-                  gv.build()
+             echo "this is a stage build"
+             sh 'mvn package'
                 
              }
         }
      }
      
-     stage("test") {
-        when {
-           expression {
-              params.testExecute
-           }
-        }
-      
-      steps {
-            script {
-               gv.test()
-            }
-        }
-    }
-   
-    stage("deploye") {
+     stage("build image") {
+        steps {
         
-           input {
-              message "entrez l'env souhaité svp!! "
-              ok "Done"
-              parameters {
-                 choice(name: "env", choices: ["int","dev","preprod","prod"], description: "")
-                }
-           }
-         steps {
+           echo "Building image docker" 
+           withCredentials([usernameColonPassword(credentialsId: 'docker_hub_repo', userVariable: 'USER', passwordVariable: 'PASS')]) {
+                          sh 'docker build -t nouh21/demo-app:jma-1.0 .'
+                          sh 'echo $PASS | docker login -u $USER --password-stdin '
+                          sh 'docker push nouh21/demo-app:jma-1.0 '
+             }
+        }
            
-             script {
-                  gv.deploye()
-                // sh "this is an env ${env}"
-              }
-           //  sh ${CREDENTAILS_USER}          
+     }
+   
+    stage("deploy") {
+        steps {
+
+            echo "Deploying application" 
+  
          }
      }
   }
