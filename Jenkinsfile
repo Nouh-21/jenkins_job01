@@ -17,7 +17,7 @@ pipeline {
         steps {
         
            echo "Building image docker" 
-           withCredentials([usernameColonPassword(credentialsId: 'docker_hub_repo', userVariable: 'USER', passwordVariable: 'PASS')]) {
+           withCredentials([usernameColonPassword(credentialsId: 'docker_hub_repo', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                           sh 'docker build -t nouh21/demo-app:jma-1.0 .'
                           sh 'echo $PASS | docker login -u $USER --password-stdin '
                           sh 'docker push nouh21/demo-app:jma-1.0 '
