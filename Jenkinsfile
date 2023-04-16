@@ -1,38 +1,36 @@
+#!/usr/bin/env groovy
 
 pipeline {
-   agent any
-   tools { maven 'maven-3.9' }
-   stages {
-      
-     stage("Build jar") {
-        steps {
-             echo "this is a stage build"
-             sh 'mvn package'
-                
-             }
+    agent none
+    stages {
+        stage('build') {
+            when {
+                expression { BRANCH_NAME == 'main' }
+            }
+            steps {
+                script {
+                    echo "Building the application..."
+                }
+            }
         }
-     
-     
-     stage("build image") {
-        steps {
-        
-           echo "Building image docker" 
-           withCredentials([usernameColonPassword(credentialsId: 'docker_hub_repo', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                          sh 'docker build -t nouh21/demo-app:jma-1.0 .'
-                          sh 'echo $PASS | docker login -u $USER --password-stdin '
-                          sh 'docker push nouh21/demo-app:jma-1.0 '
-             }
+        stage('test') {
+            
+            steps {
+                script {
+                    echo "Testing the application..."
+                    echo "This is a stage on branch $BRANCH_NAME"
+                }
+            }
         }
-           
-     }
-   
-    stage("deploy") {
-        steps {
-
-            echo "Deploying application" 
-  
-         }
-     }
-  }
-         
+        stage('deploy') {
+            when {
+                expression { BRANCH_NAME == 'main' }
+            }
+            steps {
+                script {
+                    echo "Deploying the application..."
+                }
+            }
+        }
+    }
 }
